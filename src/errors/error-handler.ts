@@ -14,35 +14,26 @@ export function handleError(
 ) {
   request.log.error(error);
 
-  const developmentDetails =
-    env.NODE_ENV === "development" ? { developmentError: error } : {};
-
-  // Erros encontrados nas validações das rotas feitas pelo Fastify com Zod.
   if (error.validation) {
     return reply.status(400).send({
-      statusCode: 400,
-      code: "VALIDATION_ERROR",
+      code: 400,
       message: "Invalid data",
-      errors: error.validation,
-      ...developmentDetails,
+      details: error.validation.map((issue) => issue.message),
     });
   }
 
-  // Erros conhecidos da aplicação.
   if (error instanceof ApplicationError) {
     return reply.status(error.statusCode).send({
-      statusCode: error.statusCode,
-      code: error.code,
+      code: error.statusCode,
       message: error.message,
-      ...developmentDetails,
+      details: error.details,
     });
   }
 
-  // Erros não tratados.
   return reply.status(500).send({
-    statusCode: 500,
-    code: "INTERNAL_SERVER_ERROR",
+    code: 500,
     message: "Internal server error",
-    ...developmentDetails,
+    details:
+      env.NODE_ENV === "development" ? [error.message] : [],
   });
 }
