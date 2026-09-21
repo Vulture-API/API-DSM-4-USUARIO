@@ -1,8 +1,8 @@
+import type { RoleRepositoryPort } from "@/modules/roles/repositories/role.repository.js";
 import {
   EmailAlreadyExistsError,
   RoleNotFoundError,
 } from "@/modules/users/errors/user.errors.js";
-import type { RoleRepositoryPort } from "@/modules/roles/repositories/role.repository.js";
 import type { UserRepositoryPort } from "@/modules/users/repositories/user.repository.js";
 import type { CreateUserInput } from "@/modules/users/schemas/user.schema.js";
 import {

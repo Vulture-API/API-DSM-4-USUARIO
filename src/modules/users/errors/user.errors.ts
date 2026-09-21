@@ -20,6 +20,9 @@ export class EmailAlreadyExistsError extends ApplicationError {
 
 export class UserDeletionConflictError extends ApplicationError {
   constructor() {
-    super(409, "The user cannot be deleted because it is referenced by another resource.");
+    super(
+      409,
+      "The user cannot be deleted because it is referenced by another resource.",
+    );
   }
 }

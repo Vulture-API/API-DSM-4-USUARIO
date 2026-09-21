@@ -38,10 +38,9 @@ export class RoleRepository implements RoleRepositoryPort {
   }
 
   async exists(id: number): Promise<boolean> {
-    const result = await this.pool.query(
-      "SELECT 1 FROM roles WHERE id = $1",
-      [id],
-    );
+    const result = await this.pool.query("SELECT 1 FROM roles WHERE id = $1", [
+      id,
+    ]);
 
     return (result.rowCount ?? 0) > 0;
   }

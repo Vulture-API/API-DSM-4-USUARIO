@@ -33,7 +33,6 @@ export function handleError(
   return reply.status(500).send({
     code: 500,
     message: "Internal server error",
-    details:
-      env.NODE_ENV === "development" ? [error.message] : [],
+    details: env.NODE_ENV === "development" ? [error.message] : [],
   });
 }
