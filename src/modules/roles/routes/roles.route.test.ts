@@ -1,5 +1,5 @@
-import type { Pool } from "pg";
 import type { FastifyInstance } from "fastify";
+import type { Pool } from "pg";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { buildApp } from "@/app.js";
