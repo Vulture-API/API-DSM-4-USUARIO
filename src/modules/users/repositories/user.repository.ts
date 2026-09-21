@@ -1,10 +1,7 @@
 import type { Pool, PoolClient } from "pg";
 
 import { database } from "@/config/database.js";
-import type {
-  PaginatedUsers,
-  User,
-} from "@/modules/users/types/user.type.js";
+import type { PaginatedUsers, User } from "@/modules/users/types/user.type.js";
 
 export type CreateUserRecord = {
   roleId: number;
@@ -143,10 +140,9 @@ export class UserRepository implements UserRepositoryPort {
   }
 
   async delete(id: number): Promise<boolean> {
-    const result = await this.pool.query(
-      "DELETE FROM users WHERE id = $1",
-      [id],
-    );
+    const result = await this.pool.query("DELETE FROM users WHERE id = $1", [
+      id,
+    ]);
 
     return (result.rowCount ?? 0) > 0;
   }
