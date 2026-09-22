@@ -1,8 +1,8 @@
+import type { RoleRepositoryPort } from "@/modules/roles/repositories/role.repository.js";
 import {
   RoleNotFoundError,
   UserNotFoundError,
 } from "@/modules/users/errors/user.errors.js";
-import type { RoleRepositoryPort } from "@/modules/roles/repositories/role.repository.js";
 import type { UserRepositoryPort } from "@/modules/users/repositories/user.repository.js";
 import type { UpdateUserInput } from "@/modules/users/schemas/user.schema.js";
 import { isPostgresError } from "@/modules/users/services/create-user.service.js";

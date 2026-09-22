@@ -3,10 +3,7 @@ import type {
   UpdateUserRecord,
   UserRepositoryPort,
 } from "@/modules/users/repositories/user.repository.js";
-import type {
-  PaginatedUsers,
-  User,
-} from "@/modules/users/types/user.type.js";
+import type { PaginatedUsers, User } from "@/modules/users/types/user.type.js";
 
 export class FakeUserRepository implements UserRepositoryPort {
   users: User[] = [];

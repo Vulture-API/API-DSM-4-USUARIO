@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { FakeRoleRepository } from "@/modules/roles/testing/fake-role.repository.js";
 import {
   EmailAlreadyExistsError,
   RoleNotFoundError,
@@ -8,7 +9,6 @@ import {
 import type { UserRepositoryPort } from "@/modules/users/repositories/user.repository.js";
 import { CreateUserService } from "@/modules/users/services/create-user.service.js";
 import { UpdateUserService } from "@/modules/users/services/update-user.service.js";
-import { FakeRoleRepository } from "@/modules/roles/testing/fake-role.repository.js";
 import { FakeUserRepository } from "@/modules/users/testing/fake-repositories.js";
 
 describe("user services", () => {
@@ -52,7 +52,11 @@ describe("user services", () => {
   it("checks roles before create and update", async () => {
     const users = new FakeUserRepository();
     const roles = new FakeRoleRepository();
-    const createService = new CreateUserService(users, roles, async () => "hash");
+    const createService = new CreateUserService(
+      users,
+      roles,
+      async () => "hash",
+    );
     const updateService = new UpdateUserService(users, roles);
 
     await expect(
