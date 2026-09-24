@@ -39,6 +39,8 @@ export function buildApp(options: BuildAppOptions = {}) {
   app.setErrorHandler(handleError);
 
   app.register(cookie);
+  app.get("/health", async () => ({ status: "ok" }));
+  app.get("/api/health", async () => ({ status: "ok" }));
   app.register(userRoutes, {
     prefix: "/api/users",
     userRepository,
