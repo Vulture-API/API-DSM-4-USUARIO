@@ -88,8 +88,14 @@ export class UserRepository implements UserRepositoryPort {
         `,
         [limit, offset],
       ),
+      // Mesmo JOIN da listagem: usuário sem credencial não aparece em data,
+      // então também não pode entrar no total (senão a paginação mente).
       this.pool.query<{ total: string }>(
-        "SELECT COUNT(*)::text AS total FROM users",
+        `
+          SELECT COUNT(*)::text AS total
+          FROM users u
+          INNER JOIN credentials c ON c.user_id = u.id
+        `,
       ),
     ]);
     const totalRecords = Number(countResult.rows[0]?.total ?? 0);
